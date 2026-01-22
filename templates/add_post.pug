@@ -1,0 +1,13 @@
+extends format
+block content
+  .postformat
+    form#postFormat(method="POST", action="/api/post", enctype="multipart/form-data")
+        input(type="hidden", name="user_id", value="1")
+        input(type="text", name="title", placeholder="Title", required)
+
+        textarea(name="content", rows="20", placeholder="Start your story!")
+        input.imginput(type="file", name="image", accept="image/*")
+
+  button.submitbtn(type="submit", form="postFormat") Submit
+
+

@@ -1,0 +1,57 @@
+extends format
+
+block content
+    h2.title RE:WIND
+
+    .marquee-container
+        .marquee#marquee1
+            span.marquee-item Rewind
+            span.marquee-item Your
+            span.marquee-item History
+            span.marquee-item Rewind
+            span.marquee-item Your
+            span.marquee-item History
+            span.marquee-item Rewind
+            span.marquee-item Your
+            span.marquee-item History
+         
+    .hero-img-wrapper
+        .hero-img-container
+        .book-anchor
+            img.books-img(src="/images/filedbooks.png" alt="Filed Books")
+        img.leaf-img(src="/images/leaf.png" alt="Leaf")
+
+    .slogan-wrapper
+        h1.slogan Read
+        h1.slogan Log
+        h1.slogan Rewind
+        img.onebook-img(src="/images/openedbook.png" alt="Opened book")
+        
+    section.maincontent
+        each post, index in result
+            a.allpost(href="/post/" + post.id)
+                p
+                    span.num= String(index + 1).padStart(2,'0')
+                    span.title= post.title
+                img.postimg(src=post.image_path alt=post.title)
+
+    .viewmorebtn
+        p 
+            a(href="/post_list") View more
+
+    .description-wrapper
+        h2 Express your <br> thoughts on books
+        p A quiet reading log where I record thoughts, <br> lines, and reflections from the books You have read. <br> A personal space to trace how reading shapes my ideas over time.
+        
+        .description-float
+            .greenbook-wrap
+                img.greenbook-img(src="/images/greenbook.png" alt="Green Book")
+            .pencil-wrap
+                img.pencil-img(src="/images/pencil.png" alt="Pencil")
+            .eraser-wrap
+                img.eraser-img(src="/images/eraser.png" alt="Eraser")
+
+
+    if result.length === 0
+        p.notfound Oh no.. You haven't started your story yet...
+    script(src="/js/main.js")

@@ -1,0 +1,11 @@
+extends format
+block content
+    .postformat 
+        form#updateFormat(method="POST", action="/update_post")
+            input(type="hidden", name="id", value=post.id)
+            input(type="text", name="title", value= post.title, placeholder="Title", required)
+
+            textarea(name="content", rows="20")=post.content
+
+    button.submitbtn(type="submit", form="updateFormat") Save
+

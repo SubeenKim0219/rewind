@@ -1,0 +1,36 @@
+extends format
+
+block content
+    .postformat
+        .postformat-top
+            if prev
+                a(href= "/post/" + prev.id)
+                    img.bookleft(src="/images/left.png" alt="left button")
+            else
+                img.bookleft(src="/images/left.png" alt="left button")
+            
+            if post.image_path
+                img.postbook(src=post.image_path alt=post.title)
+            if next
+                a.bookright(href="/post/" + next.id)
+                    img.bookright(src="/images/right.png" alt="right button")
+            else
+                img.bookright(src="/images/right.png" alt="right button")
+
+        h2= post.title
+
+        div.postcontent= post.content
+        p.date Published on #{post.created_time}
+
+        
+        
+    .managementbuttons
+        form(method= "GET", action="/update_post/" + post.id)
+            button(type="submit") Edit
+
+        form(method= "POST", action="/api/delete_post")
+            input(type="hidden", name="id", value=post.id)
+            button(type="submit") Delete
+
+
+

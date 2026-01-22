@@ -1,0 +1,19 @@
+extends format
+
+block content
+    section.maincontent
+        each post, index in result
+            a.allpost(href="/post/" + post.id)
+                p
+                    span.num= String(index + 1).padStart(2,'0')
+                    span.title= post.title
+                img.postimg(src=post.image_path alt=post.title)
+    .pageBtn
+        if list > 1
+            a(href=`/post_list?list=${list - 1}`) ◀
+        span= list
+        if result.length === limit
+            a(href=`/post_list?list=${list + 1}`) ▶
+
+    if result.length === 0
+        p.notfound Oh no.. You haven't started your story yet...
