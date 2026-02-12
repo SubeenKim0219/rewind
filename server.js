@@ -29,7 +29,6 @@ const upload = multer({
   }),
 });
 
-
 //GET
 app.get("/", (req, res) => {
   res.redirect("/main");
@@ -74,11 +73,11 @@ app.get("/post/:id", async (req, res) => {
   if (!post) return res.status(404).render("404");
   const posts = await data.getPosts("", 0, 1000);
 
-  const index = posts.findIndex(p => Number(p.id) === id);
+  const index = posts.findIndex((p) => Number(p.id) === id);
   const prev = index > 0 ? posts[index - 1] : null;
   const next = index >= 0 && index < posts.length - 1 ? posts[index + 1] : null;
   const comments = await data.getComment(id);
-  res.render("render_post", { post, comments, prev, next});
+  res.render("render_post", { post, comments, prev, next });
 });
 
 app.get("/create", (req, res) => {
@@ -96,10 +95,10 @@ app.get("/update_post/:id", async (req, res) => {
 });
 
 //POST
-app.post("/api/post", upload.single('image'), async (req, res) => {
+app.post("/api/post", upload.single("image"), async (req, res) => {
   const params = req.body;
   const imagePath = req.file ? "/uploads/" + req.file.filename : null;
-  const result = await data.addPost({...params, image_path: imagePath});
+  const result = await data.addPost({ ...params, image_path: imagePath });
   if (!result) {
     return res.status(400).send({
       status: "error",
@@ -177,7 +176,7 @@ app.post("/update_comment", async (req, res) => {
 app.use((req, res) => {
   res.status(404).render("404");
 });
-const PORT = process.env.PORT || 4131;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
